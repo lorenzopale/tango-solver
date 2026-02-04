@@ -3,6 +3,9 @@ from backend_solver import Game as Game
 from gui_functions import GUI as GUI
 from utilities import timestamp as timestamp, debug as debug, log as log
 
+VERSION = "1.2"
+DATE = "2026.02.04"
+
 class sound:
     @staticmethod
     def lowbeep():
@@ -16,6 +19,11 @@ class sound:
 
 
 def main():
+    print("="*60)
+    print("=" + f"{"TANGO SOLVER":^58}" +"=")
+    print("=" + f"{f"v{VERSION} - {DATE}":^58}" + "=")
+    print("=" + f"{f"Lorenzo Paleari":^58}" + "=")
+    print("=" * 60 + "\n")
     if log: print(f"{timestamp()} Script started.")
     gui = GUI()
     if log: print(f"{timestamp()} Object initializated successfully.")
