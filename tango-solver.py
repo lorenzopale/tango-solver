@@ -1,8 +1,7 @@
+import sys, math, winsound
 from backend_solver import Game as Game
 from gui_functions import GUI as GUI
-from utilities import timestamp as timestamp
-import sys, math, winsound
-from utilities import debug as debug, log as log
+from utilities import timestamp as timestamp, debug as debug, log as log
 
 class sound:
     @staticmethod
@@ -47,9 +46,5 @@ def main():
 
 # # # MAIN SCRIPT when executed as script from command line
 if __name__ == "__main__":
-    #args = sys.argv
-    #if args.lower() == '--help' or arg.lower() == '-h':
-    #    exit()
-    #else:
-    #    main()
+
     main()
