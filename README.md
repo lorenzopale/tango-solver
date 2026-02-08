@@ -1,8 +1,8 @@
 # tango-solver
 **Automatic solver** of LinkedIn's game [**Tango**](https://www.linkedin.com/games/tango)
 using:
-- **image analysis** of the game displayed on the browser,
-- procedural **solution**,
+- **image analysis** of the game displayed on the browser (OpenCV),
+- rule-based procedural **solution**,
 - and completion of the game by **mouse automation** over the browser.
 
 
