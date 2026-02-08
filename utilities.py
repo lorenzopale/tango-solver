@@ -1,5 +1,5 @@
 log = True
-debug = False
+debug = True
 
 def timestamp() -> str:
     """

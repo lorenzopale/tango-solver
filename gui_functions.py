@@ -100,7 +100,7 @@ class GUI:
         if debug: print(f"{timestamp()} Start extrapolation grid-space info")
         # Extrapolates grid-space information from detected cells
         self.detect_grid(moons_uv + suns_uv + empty_uv)
-        if debug: print(f"Grid size: {self.grid_n}x{self.grid_n}")
+        if debug: print(f"Grid size: {self.grid_n}x{self.grid_n} ")
         # Locates the found cells in the grid-space and builds Game Grid
         if debug: print(f"{timestamp()} Start location grid")
         GameGrid = np.int8(np.zeros((self.grid_n,self.grid_n)))
@@ -217,7 +217,7 @@ class GUI:
         return spacing
 
     @staticmethod
-    def find_template(image, template, threshold = 0.95): #AI
+    def find_template(image, template, threshold = 0.95):
 
         def _suppress_duplicates(detections, min_dist=10):
             # sort by score (best first)
