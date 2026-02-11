@@ -1,4 +1,7 @@
 # tango-solver
+![Static Badge](https://img.shields.io/badge/version-v1.3_(11.02.2026)-blue)
+![Static Badge](https://img.shields.io/badge/last_tested-11_feb_2026-green)
+
 **Automatic solver** of LinkedIn's game [**Tango**](https://www.linkedin.com/games/tango)
 using:
 - **image analysis** of the game displayed on the browser (OpenCV),
@@ -14,7 +17,7 @@ The code is not optimised, nor robust to graphics changes. I will try to mantain
 > [!WARNING]
 > This solver **is not meant to be used to cheat** on the online LinkedIn game: what would be the fun of it?
 
-> _Last time tested: 04-feb-2026 --> Passed_
+> _Last time tested: 12-feb-2026 --> Passed_
 
 ## Installation
 ```sh
@@ -62,8 +65,29 @@ Check if all requirements are met by running `pip install --dry-run -r requireme
    - Solve the codified game by iterating over rows and columns and procedurally filling in empty cells;
    - Once a solution is found, translates the solution into the moves to perform;
    - Perform right/left clicks to input the found solution into the browser grid.
+
+## Tune-up
+If the image recognition fails to properly identify and locate the cells and symbols, the following two parameters are available for tune-up:
+- manual grid size (`MANUAL_N`: integer): if non zero, grid size recognition is skipped and the manual grid size is used.
+- recognition sensitivity (`SENSITIVITY`: real number between 0 and 1): represent the sensitivity/tolerance of the computer vision recognition model for cells and symbols. The closer to 1, the more an exact match is searched for. If the model is too picky and not all cells/symbols are found, decrease sensitivity. If false positive / garbage is found, increase sensitivity. Default = 0.91.
+
+These parameters are optional and can be used as follows:
+ 
+```sh
+python tango_solver.py [-n=MANUAL_N] [-s=SENSITIVITY]
+```
+    
   
+```python
+from tango_solver import main as tango_solver
+tango_solver(manual_n = MANUAL_N, sensitivity = SENSITIVITY)
+```
+
+
+
 ## Media
+
+
 
 ## License
 GNU General Public License v3.0 (See [LICENSE](LICENSE))
