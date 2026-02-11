@@ -85,7 +85,7 @@ tango_solver(manual_n = MANUAL_N, sensitivity = SENSITIVITY)
 
 ## Media
 
-
+[LinkedIn post with example video](https://www.linkedin.com/posts/lorenzopaleari_i-wrote-a-python-solver-for-a-linkedin-puzzle-activity-7426565557564588032-jJEh?utm_source=share&utm_medium=member_desktop&rcm=ACoAACtr1FABM_dBv9-rKN-1YM5zcMXhXIl0zFM)
 
 ## License
 GNU General Public License v3.0 (See [LICENSE](LICENSE))
