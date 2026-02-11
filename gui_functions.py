@@ -22,7 +22,7 @@ class GUI:
     # a,b = RELATIVE COORDINATES NORMALIZED BY GRID SPACING
     # (x,u,a = vertical; y,v,b = horizontal; origin = top left)
 
-    def __init__(self):
+    def __init__(self, manual_n: int = 0, sensitivity: float = 0.91):
         self.x0             = 0
         self.y0             = 0
         self.region         = []
@@ -31,6 +31,8 @@ class GUI:
         self.grid_n         = 6
         self.grid_uv_coord  = np.empty([0,0,2])
         self.grid_xy_coord  = np.empty([0,0,2])
+        self.manual_n       = manual_n
+        self.sensitivity    = sensitivity
 
 
     def start(self):
@@ -89,11 +91,11 @@ class GUI:
         # Preloads template image
         cv2_image = cv2.imread(GUI.img_game,  cv2.IMREAD_GRAYSCALE)
         # Finds occurrencies in the snapshot
-        moons_uv  = GUI.find_template(cv2_image, GUI.img_moon)
-        suns_uv   = GUI.find_template(cv2_image, GUI.img_sun)
-        empty_uv  = GUI.find_template(cv2_image, GUI.img_empty)
-        equals_uv = GUI.find_template(cv2_image, GUI.img_equal)
-        cross_uv  = GUI.find_template(cv2_image, GUI.img_cross)
+        moons_uv  = GUI.find_template(cv2_image, GUI.img_moon,  threshold = self.sensitivity)
+        suns_uv   = GUI.find_template(cv2_image, GUI.img_sun,   threshold = self.sensitivity)
+        empty_uv  = GUI.find_template(cv2_image, GUI.img_empty, threshold = self.sensitivity)
+        equals_uv = GUI.find_template(cv2_image, GUI.img_equal, threshold = self.sensitivity)
+        cross_uv  = GUI.find_template(cv2_image, GUI.img_cross, threshold = self.sensitivity)
         if debug: print(f"Objects found: {len(moons_uv)} moons, {len(suns_uv)} suns, {len(empty_uv)} empty cells, "
               f"{len(equals_uv)} equal symbols, {len(cross_uv)} cross symbols. ")
 
@@ -119,9 +121,14 @@ class GUI:
         self.GameDepend = GameDepend
 
     def detect_grid(self, cells):
-        spacing = GUI.find_grid_spacing(cells)
         size = min(self.region[2], self.region[3])
-        n = int(size / spacing)
+        if self.manual_n:
+            if debug: print(f"Manual grid n = {manual_n}. Find_grid_spacing is skipped.")
+            n = self.manual_n
+            spacing = int(size/n)
+        else:
+            spacing = GUI.find_grid_spacing(cells)
+            n = int(size / spacing)
         uv_centers_1D = np.int32(np.linspace(0 + spacing/2, size - spacing/2, n))
         u, v = np.meshgrid(uv_centers_1D, uv_centers_1D, indexing="ij")
         uv_centers = np.stack((u,v), axis=-1)
@@ -217,7 +224,7 @@ class GUI:
         return spacing
 
     @staticmethod
-    def find_template(image, template, threshold = 0.95):
+    def find_template(image, template, threshold = 0.91):
 
         def _suppress_duplicates(detections, min_dist=10):
             # sort by score (best first)
