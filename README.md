@@ -17,8 +17,6 @@ The code is not optimised, nor robust to graphics changes. I will try to mantain
 > [!WARNING]
 > This solver **is not meant to be used to cheat** on the online LinkedIn game: what would be the fun of it?
 
-> _Last time tested: 12-feb-2026 --> Passed_
-
 ## Installation
 ```sh
 git clone https://github.com/lorenzopale/tango-solver.git
